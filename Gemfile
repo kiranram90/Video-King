@@ -12,3 +12,5 @@ gem 'rake'
 gem 'pry'
 gem 'sinatra-activerecord'
 gem 'require_all'
+
+gg
