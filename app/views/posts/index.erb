@@ -1,0 +1,7 @@
+<h1>Favorite Games</h1>
+
+<% @posts.each do |post| %>
+   <h2><a href="/posts/<%= post.id %>"> <%= post.title %></a></h2>
+   <p>content: <%= post.content %></p>
+   <p>user_id: <%= post.user_id %></p>
+<% end %>
