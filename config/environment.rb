@@ -1,10 +1,9 @@
 require 'bundler'
+require "sinatra/activerecord"
 
 Bundler.require
 
-ActiveRecord::Base.establish_connection(
-    :adapter => "sqlite3",
-    :database => "db/developtment.sqlite"
-)
+# New version of sinatra-activerecord uses this setup line
+set :database, {adapter: "sqlite3", database: "db.sqlite3"}
 
 require_all 'app'
