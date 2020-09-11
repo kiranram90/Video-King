@@ -9,6 +9,10 @@ class PostsController < ApplicationController
     #make a get request to '/recipies:id'
 
     # index
+     get '/' do 
+        redirect "/posts"
+     end
+
     get '/posts' do
         if !logged_in?
             redirect "/login" # Redirecting if they aren't
