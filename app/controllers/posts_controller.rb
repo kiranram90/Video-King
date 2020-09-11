@@ -1,16 +1,9 @@
 class PostsController < ApplicationController
 
 
-    #Read 
-    #Index 
-    #make a get to /posts
-
-    #show
-    #make a get request to '/recipies:id'
-
     # index
      get '/' do 
-        redirect "/posts"
+        redirect "/login"
      end
 
     get '/posts' do
@@ -74,9 +67,14 @@ class PostsController < ApplicationController
         if !logged_in?
             redirect "/login" # Redirecting if they aren't
         else
-            if @post = current_user.posts.find(params[:id]) # rendering if they are the owner
+            if @post = Post.find(params[:id])
+                if @post.user.id == current_user.id
+                    erb :'posts/edit'
+                else
+                    erb :'posts/error'
+                end
+                     # rendering if they are the owner
                 # "An edit post form #{current_user.id} is editing #{post.id}" 
-                erb :'posts/edit'
             else 
                 redirect '/posts'
             end
@@ -88,11 +86,13 @@ class PostsController < ApplicationController
         if !logged_in?
             redirect "/login" # Redirecting if they aren't
         else
-            if @post = current_user.posts.find(params[:id]) # delete if they are the owner
-                @post.delete
-                redirect '/posts'
-            else 
-                redirect '/posts'
+            if @post = Post.find(params[:id])
+                if @post.user.id == current_user.id
+                    @post.destroy
+                    erb :'/posts'
+                else
+                    erb :'posts/error'
+                end
             end
         end
     end
