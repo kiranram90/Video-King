@@ -1,0 +1,12 @@
+<h1> Edit Post for <%= @post.title %></h1>
+<p><%= @error %></p>
+<form action="/posts/<%=@post.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">  
+  <%# regular forms only take get / post. So work around to submit update %>
+  <label>Title</label>
+  <input type="text" name="title" value="<%= @post.title %>">
+  <label>Content</label>
+  <textarea type="text" name="content" value=""><%= @post.content %></textarea>
+  <button type="submit">Edit Post</button>
+</form>
+  

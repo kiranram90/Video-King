@@ -3,8 +3,8 @@ class ApplicationController < Sinatra::Base
 configure do 
     set :public_folder, 'public'
     set :views, 'app/views'
-    #enable :sessions
-    #set :session_secret, "video_king_lv"
+    enable :sessions
+    set :session_secret, "video_king_lv"
 end
 
 
@@ -15,7 +15,6 @@ helpers do
 
     def current_user
         @current_user ||= User.find_by(:email => session[:email]) if session[:email]
-
     end
 
     def login(email, password)
