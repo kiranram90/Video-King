@@ -89,11 +89,16 @@ class PostsController < ApplicationController
             if @post = Post.find(params[:id])
                 if @post.user.id == current_user.id
                     @post.destroy
-                    erb :'/posts'
+                    redirect '/posts'
                 else
                     erb :'posts/error'
                 end
             end
         end
+    end
+
+    #logout
+    get 'logout' do
+        logout
     end
 end
