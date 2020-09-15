@@ -14,13 +14,13 @@ helpers do
     end
 
     def current_user
-        @current_user ||= User.find_by(:email => session[:email]) if session[:email]
+        @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
 
     def login(email, password)
         user = User.find_by(:email => email)
        if user && user.authenticate(password)
-         session[:email] = user.email
+         session[:user_id] = user.id
         else 
          redirect 'login'
        end

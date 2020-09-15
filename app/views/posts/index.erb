@@ -4,7 +4,7 @@
 <% @posts.each do |post| %>
    <h2><a href="/posts/<%= post.id %>"> <%= post.title %></a></h2>
    <p>content: <%= post.content %></p>
-   <p>user_id: <%= post.user_id %></p>
+   <p>User name: <a href="posts/user/<%= post.user.id %>"> <%= post.user.email %></a></p>
    <% # if the currently logged in user created this recipe: %>
    <a href="/posts/<%= post.id %>/edit">Edit </a>
    <form action="/posts/<%= post.id %>" method="post">

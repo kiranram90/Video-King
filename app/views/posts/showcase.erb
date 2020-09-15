@@ -1,0 +1,6 @@
+<% @posts.each do |post| %>
+ <h1><%= post.title %></h1>
+ <h1><%= post.content %></h1>
+ <h1><%= post.user_id %></h1>
+<% end %>
+<a href="/posts">Go back</a>

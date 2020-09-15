@@ -31,6 +31,12 @@ class PostsController < ApplicationController
         @post = Post.find(params["id"])
         erb :'posts/show' # when the user click on the game link it takes you to the game.
     end
+
+    # showcase
+    get '/posts/user/:user_id' do 
+        @posts = Post.where(user_id: params["user_id"])
+        erb :'posts/showcase' # when the user click on the email it takes you to a page with all user posts. 
+    end
     
     # create
     post '/posts' do
@@ -49,14 +55,14 @@ class PostsController < ApplicationController
     #update
     patch '/posts/:id' do 
         @post = Post.find(params[:id])
-        if !params["title"].empty? && !params["content"].empty?
+        if !params["title"].empty? && !params["content"].empty? && current_user.id == @post.user_id
             @post.title = params[:title]
             @post.content = params[:content]
             @post.save
             redirect "/posts/#{params[:id]}"
         else
             @error = "Data invalid. Please try again"
-            erb :'posts/edit'
+            redirect "/posts/#{params[:id]}/edit"
         end
     end
 
